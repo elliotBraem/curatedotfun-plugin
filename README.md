@@ -20,7 +20,6 @@
   - [Installing dependencies](#installing-dependencies)
   - [Running the app](#running-the-app)
   - [Building for production](#building-for-production)
-  - [Running tests](#running-tests)
 - [Contributing](#contributing)
 
 </details>
@@ -46,14 +45,6 @@ bun run dev
 ```bash
 bun run build
 ```
-
-### Running tests
-
-```bash
-bun run test
-```
-
-See the full [testing guide](./playwright-tests/README.md).
 
 ## Contributing
 

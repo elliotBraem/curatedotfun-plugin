@@ -1,29 +1,39 @@
 {
-  "name": "project-template",
+  "name": "@curatedotfun/supabase",
   "version": "0.0.1",
-  "homepage": "/",
+  "description": "Supabase distributor plugin for curatedotfun",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "fmt": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "fmt:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
-    "test": "bunx playwright test",
-    "test:ui": "bunx playwright test --ui",
-    "dev": "cat welcome.txt"
+    "test": "bun test",
+    "prepublishOnly": "bun run build"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "keywords": [
+    "curatedotfun",
+    "supabase",
+    "distributor",
+    "plugin"
+  ],
+  "author": "",
+  "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.46.1",
     "@types/node": "^20.11.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.0.0",
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
