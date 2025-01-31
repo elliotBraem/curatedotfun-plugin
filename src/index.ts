@@ -1,4 +1,4 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 interface DistributorPlugin {
   name: string;
@@ -8,24 +8,27 @@ interface DistributorPlugin {
 }
 
 export class SupabaseDistributorPlugin implements DistributorPlugin {
-  name = '@curatedotfun/supabase';
+  name = "@curatedotfun/supabase";
   private client: SupabaseClient | null = null;
-  private tableName: string = 'content';
+  private tableName: string = "content";
   private dbOps?: any;
 
   constructor(dbOperations?: any) {
     this.dbOps = dbOperations;
   }
 
-  async initialize(feedId: string, config: Record<string, string>): Promise<void> {
+  async initialize(
+    feedId: string,
+    config: Record<string, string>,
+  ): Promise<void> {
     const { supabaseUrl, supabaseKey, tableName } = config;
-    
+
     if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Missing required config: supabaseUrl and supabaseKey');
+      throw new Error("Missing required config: supabaseUrl and supabaseKey");
     }
 
     this.client = createClient(supabaseUrl, supabaseKey);
-    
+
     if (tableName) {
       this.tableName = tableName;
     }
@@ -33,7 +36,7 @@ export class SupabaseDistributorPlugin implements DistributorPlugin {
     // Verify connection and table existence
     const { error } = await this.client
       .from(this.tableName)
-      .select('id')
+      .select("id")
       .limit(1);
 
     if (error) {
@@ -43,16 +46,16 @@ export class SupabaseDistributorPlugin implements DistributorPlugin {
 
   async distribute(feedId: string, content: string): Promise<void> {
     if (!this.client) {
-      throw new Error('Supabase client not initialized. Call initialize() first.');
+      throw new Error(
+        "Supabase client not initialized. Call initialize() first.",
+      );
     }
 
-    const { error } = await this.client
-      .from(this.tableName)
-      .insert({
-        feed_id: feedId,
-        content,
-        created_at: new Date().toISOString()
-      });
+    const { error } = await this.client.from(this.tableName).insert({
+      feed_id: feedId,
+      content,
+      created_at: new Date().toISOString(),
+    });
 
     if (error) {
       throw new Error(`Failed to distribute content: ${error.message}`);
