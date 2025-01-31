@@ -1,16 +1,21 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-export interface DistributorPlugin {
+interface DistributorPlugin {
   name: string;
   initialize(feedId: string, config: Record<string, string>): Promise<void>;
   distribute(feedId: string, content: string): Promise<void>;
   shutdown?(): Promise<void>;
 }
 
-export class SupabaseDistributor implements DistributorPlugin {
-  name = 'supabase';
+export class SupabaseDistributorPlugin implements DistributorPlugin {
+  name = '@curatedotfun/supabase';
   private client: SupabaseClient | null = null;
   private tableName: string = 'content';
+  private dbOps?: any;
+
+  constructor(dbOperations?: any) {
+    this.dbOps = dbOperations;
+  }
 
   async initialize(feedId: string, config: Record<string, string>): Promise<void> {
     const { supabaseUrl, supabaseKey, tableName } = config;
@@ -68,4 +73,4 @@ export class SupabaseDistributor implements DistributorPlugin {
 // );
 // create index content_feed_id_idx on content(feed_id);
 
-export default new SupabaseDistributor();
+export default SupabaseDistributorPlugin;

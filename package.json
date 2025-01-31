@@ -1,6 +1,6 @@
 {
   "name": "@curatedotfun/supabase",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Supabase distributor plugin for curatedotfun",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,5 +35,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
