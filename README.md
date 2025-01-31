@@ -5,10 +5,10 @@
 
 <div align="center">
 
-<h1 style="font-size: 2.5rem; font-weight: bold;">Project Title</h1>
+<h1 style="font-size: 2.5rem; font-weight: bold;">curate.fun plugin template</h1>
 
   <p>
-    <strong>a basic project template for new projects</strong>
+    <strong>a basic plugin template for curate.fun</strong>
   </p>
 
 </div>
